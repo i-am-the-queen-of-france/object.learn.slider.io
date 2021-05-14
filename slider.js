@@ -1,58 +1,33 @@
-let slider1 = {
+const slider1 = {
   showPrevBtn: document.getElementById("show-prev"),
   showNextBtn: document.getElementById("show-next"),
   slideImage: document.getElementById("slider-img"),
-  imagesUrl: ["img/01.jpg", "img/02.jpg", "img/03.jpg", "img/04.jpg", "img/05.jpg", "img/06.jpg"],
+  imageUrls: ["img/01.jpg", "img/02.jpg", "img/03.jpg", "img/04.jpg", "img/05.jpg", "img/06.jpg"],
   currentImageIndex: 0,
-  imagesUrlLastIndex: function () {
-    let that = this;
-    that.imagesUrl.length - 1;
+  imageUrlsLastIndex: function() {
+    return this.imageUrls.length - 1;
   },
 
 
   start: function () {
-    let that = this;
-    //подписываемся на события
-    that.showPrevBtn.addEventListener("click", function (e) {
-      that.onShowPrevBtnClick;
-      console.log("its OK");
-    });
-    //this.onShowPrevBtnClick);
-    that.showNextBtn.addEventListener("click", function (e) {
-      that.onShowNextBtnClick;
-      console.log("its OK");
-    });
+    this.showPrevBtn.addEventListener("click", this.onShowPrevBtnClick.bind(this));
+    this.showNextBtn.addEventListener("click", this.onShowNextBtnClick.bind(this));
 
-    //массив картинок
-    // this.imagesUrl.push("img/01.jpg");
-    // this.imagesUrl.push("img/02.jpg");
-    // this.imagesUrl.push("img/03.jpg");
-    // this.imagesUrl.push("img/04.jpg");
-    // this.imagesUrl.push("img/05.jpg");
-    // this.imagesUrl.push("img/06.jpg");
-
-
-
-    that.slideImage.src = that.imagesUrl[that.currentImageIndex];
-
-
+    this.slideImage.src = this.imageUrls[this.currentImageIndex];
   },
 
-  onShowPrevBtnClick: function (e) {
-    let that = this;
-    console.log("click on prevBtn");
-    if (that.currentImageIndex === 0) {
-      that.currentImageIndex = that.imagesUrlLastIndex + 1;
-    };
-    that.currentImageIndex--;
-    that.slideImage.src = that.imagesUrl[that.currentImageIndex];
+  onShowPrevBtnClick: function () {
+    this.currentImageIndex--;
+    if (this.currentImageIndex === -1) {
+      this.currentImageIndex = this.imageUrlsLastIndex();
+    }
+    this.slideImage.src = this.imageUrls[this.currentImageIndex];
   },
-  onShowNextBtnClick: function (e) {
-    let that = this;
-    if (that.currentImageIndex === that.imagesUrlLastIndex) {
-      that.currentImageIndex = -1;
-    };
-    that.currentImageIndex = that.currentImageIndex + 1;
-    that.slideImage.src = that.imagesUrl[that.currentImageIndex];
+  onShowNextBtnClick: function () {
+    this.currentImageIndex++;
+    if (this.currentImageIndex > this.imageUrlsLastIndex()) {
+      this.currentImageIndex = 0;
+    }
+    this.slideImage.src = this.imageUrls[this.currentImageIndex];
   }
 }
