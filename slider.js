@@ -10,8 +10,8 @@ const slider1 = {
 
 
   start: function () {
-    this.showPrevBtn.addEventListener("click", this.onShowPrevBtnClick.bind(this));
-    this.showNextBtn.addEventListener("click", this.onShowNextBtnClick.bind(this));
+    this.showPrevBtn.addEventListener("click", this.onShowPrevBtnClick.bind(slider1));
+    this.showNextBtn.addEventListener("click", this.onShowNextBtnClick.bind(slider1));
 
     this.slideImage.src = this.imageUrls[this.currentImageIndex];
   },
