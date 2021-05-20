@@ -4,10 +4,6 @@ const slider1 = {
   slideImage: document.getElementById("slider-img"),
   imageUrls: ["img/01.jpg", "img/02.jpg", "img/03.jpg", "img/04.jpg", "img/05.jpg", "img/06.jpg"],
   currentImageIndex: 0,
-  imageUrlsLastIndex: function() {
-    return this.imageUrls.length - 1;
-  },
-
 
   start: function () {
     this.showPrevBtn.addEventListener("click", this.onShowPrevBtnClick.bind(slider1));
@@ -19,13 +15,13 @@ const slider1 = {
   onShowPrevBtnClick: function () {
     this.currentImageIndex--;
     if (this.currentImageIndex === -1) {
-      this.currentImageIndex = this.imageUrlsLastIndex();
+      this.currentImageIndex = this.imageUrls.length - 1;
     }
     this.slideImage.src = this.imageUrls[this.currentImageIndex];
   },
   onShowNextBtnClick: function () {
     this.currentImageIndex++;
-    if (this.currentImageIndex > this.imageUrlsLastIndex()) {
+    if (this.currentImageIndex > this.imageUrls.length - 1) {
       this.currentImageIndex = 0;
     }
     this.slideImage.src = this.imageUrls[this.currentImageIndex];
